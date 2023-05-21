@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
  
 });
 
-const puerto =3306;
+const puerto =3000;
 
 const app = express();
 
