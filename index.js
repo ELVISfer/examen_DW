@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 
 ///Trae todos los Restaurante con todos sus campos
 app.get('/restariante', ( req, res) =>{
-  connection.query('SELECT idRestariante, nombre_del_rest, ubicacion FROM examen.Restariante', function(err, rows, fields) {
+  connection.query('SELECT * FROM examen.Restariante', function(err, rows, fields) {
     if (err) throw err;
     res.status(200).json(rows)
   });  
@@ -144,9 +144,9 @@ app.get('/api/opiniones:id', (req, res) =>{
 
 ///Crea un opinion
 app.post('/api/opiniones', (req, res) =>{
-  const {descripcion} = req.body;
+  const {Nombre_cliente} = req.body;
   
-  connection.query('Insert into examen.opiniones (nombre_cliente) Values (?);', [descripcion] , function(err, rows, fields) {
+  connection.query('Insert into examen.opiniones (nombre_cliente) Values (?);', [Nombre_cliente] , function(err, rows, fields) {
     if (err) throw err;
     res.status(200).json(rows)
   });  
@@ -155,8 +155,8 @@ app.post('/api/opiniones', (req, res) =>{
 ///Modificar un opinion
 app.put('/api/opiniones/:id', (req, res) =>{
   const {id} = req.params;
-  const {descripcion} = req.body;
-  connection.query('Update examen.opiniones SET calificacion = ? WHERE id = ?', [descripcion, id] , function(err, rows, fields) {
+  const {calificacion} = req.body;
+  connection.query('Update examen.opiniones SET calificacion = ? WHERE id = ?', [calificacion, id] , function(err, rows, fields) {
     if (err) throw err;
     res.status(200).json(rows)
   });  
@@ -229,7 +229,7 @@ app.delete('/api/plato/:id', (req, res) =>{
 
 ////**************reservaciones*****************////
 app.get('/reservaciones', (req, res) =>{
-  connection.query('SELECT id, nombre_cliente FROM examen.reservaciones', function(err, rows, fields) {
+  connection.query('SELECT * FROM examen.reservaciones;', function(err, rows, fields) {
     if (err) throw err;
     res.status(200).json(rows)
   });  
@@ -247,9 +247,9 @@ app.get('/api/reservaciones/:id', (req, res) =>{
 
 ///Crea una reservacion
 app.post('/api/reservacion', (req, res) =>{
-  const {descripcion} = req.body;
+  const {Nombre_cliente} = req.body;
   
-  connection.query('Insert into examne.reservaciones (nombre_cliente) Values (?);', [descripcion] , function(err, rows, fields) {
+  connection.query('Insert into examne.reservaciones (nombre_cliente) Values (?);', [Nombre_cliente] , function(err, rows, fields) {
     if (err) throw err;
     res.status(200).json(rows)
   });  
@@ -258,8 +258,8 @@ app.post('/api/reservacion', (req, res) =>{
 ///Modificar una reservacion
 app.put('/api/reservacion/:id', (req, res) =>{
   const {id} = req.params;
-  const {descripcion} = req.body;
-  connection.query('Update examen.reservaciones SET  nombre_cliente = ? WHERE id = ?', [descripcion, id] , function(err, rows, fields) {
+  const {Nombre_cliente} = req.body;
+  connection.query('Update examen.reservaciones SET  nombre_cliente = ? WHERE id = ?', [Nombre_cliente, id] , function(err, rows, fields) {
     if (err) throw err;
     res.status(200).json(rows)
   });  
